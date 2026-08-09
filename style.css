@@ -527,3 +527,38 @@ textarea { resize: vertical; min-height: 80px; }
   border-color: #dc2626 !important;
   color: #dc2626 !important;
 }
+
+/* === FŐMENÜ FÜGGŐLEGES (VERTIKÁLIS) KIJELZŐ-KITÖLTÉSE === */
+
+/* A főmenü konténerét rugalmas magasításra állítjuk */
+#step0 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 85vh; /* A mobilképernyő magasságának 85%-át kitölti */
+  padding: 20px 16px;
+  box-sizing: border-box;
+}
+
+/* A gombok csoportja kitölti a fennmaradó függőleges helyet */
+#step0 .menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Gombok közötti távolság */
+  flex-grow: 1;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* A főmenü gombjai magasabbak/vastagabbak lesznek */
+#step0 .menu-actions .btn {
+  flex: 1; /* Egyenlő arányban elosztja a magasságot a gombok között */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 20px;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 14px;
+  min-height: 60px; /* Biztosítja a kényelmes, vastag nyomófelületet */
+}
