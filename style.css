@@ -528,69 +528,11 @@ textarea { resize: vertical; min-height: 80px; }
   color: #dc2626 !important;
 }
 
-/* === FŐMENÜ FÜGGŐLEGES (VERTIKÁLIS) KIJELZŐ-KITÖLTÉSE === */
-
-/* A főmenü konténerét rugalmas magasításra állítjuk */
-#step0 {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 85vh; /* A mobilképernyő magasságának 85%-át kitölti */
-  padding: 20px 16px;
-  box-sizing: border-box;
-}
-
-/* A gombok csoportja kitölti a fennmaradó függőleges helyet */
-#step0 .menu-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 16px; /* Gombok közötti távolság */
-  flex-grow: 1;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-/* A főmenü gombjai magasabbak/vastagabbak lesznek */
+/* === KIZÁRÓLAG A FŐMENÜ 4 GOMBJÁNAK VASTAGÍTÁSA === */
 #step0 .menu-actions .btn {
-  flex: 1; /* Egyenlő arányban elosztja a magasságot a gombok között */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px 20px;
-  font-size: 17px;
-  font-weight: 700;
-  border-radius: 14px;
-  min-height: 60px; /* Biztosítja a kényelmes, vastag nyomófelületet */
-}
-
-/* === FŐMENÜ GOMBOK FÜGGŐLEGES VASTAGÍTÁSA (FIX MAGASSÁG) === */
-
-/* A főmenü konténere nyúljon meg függőlegesen */
-#step0 {
-  display: flex !important;
-  flex-direction: column !important;
-  min-height: 80vh !important;
-  justify-content: space-between !important;
-}
-
-/* A gombok doboza töltse ki a teret */
-#step0 .menu-actions {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 16px !important;
-  flex-grow: 1 !important;
-  justify-content: space-evenly !important;
-  margin-top: 20px !important;
-}
-
-/* A 4 főmenü gomb vastagsága / magassága */
-#step0 .menu-actions .btn {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-height: 75px !important; /* <--- EZ TESZI VASTAGGÁ A GOMBOKAT */
-  padding: 20px !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  border-radius: 14px !important;
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+  min-height: 70px !important;
+  font-size: 17px !important;
+  line-height: 1.3 !important;
 }
