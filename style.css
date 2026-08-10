@@ -1,4 +1,6 @@
-/* GLOBÁLIS RESET */
+/* ==========================================================================
+   1. GLOBÁLIS RESET ÉS VÁLTOZÓK (VILÁGOS TÉMA ALAPÉRTELMEZÉSBEN)
+   ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -40,18 +42,19 @@ body {
   display: block;
 }
 
-/* FŐ KONTÉNER (STABIL 450PX SZÉLESSÉG, NEM TUD SZÉTNYÚLNI) */
+/* FŐ KONTÉNER */
 .container {
   background: var(--card-bg);
   padding: 24px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   width: 100%;
-  max-width: 450px !important; /* EZ GARANTÁLJA, HOGY NEM NYÚLIK TOVÁBB */
-  min-width: 0; /* Meggátolja a flexbox belső tágulását (pl. térkép miatt) */
+  max-width: 450px !important;
+  min-width: 0;
   text-align: center;
   overflow: hidden;
   margin: 0 auto;
+  position: relative !important;
   animation: fadeIn 0.25s ease-out;
 }
 
@@ -107,7 +110,7 @@ p { margin: 0 0 16px 0; font-size: 14px; color: var(--text-muted); }
   box-shadow: 0 2px 4px rgba(0,0,0,0.06);
 }
 
-/* GOMBOK STÍLUSA ÉS SORINTÉZÉSE */
+/* GOMBOK STÍLUSA */
 .btn {
   width: 100%;
   padding: 12px 16px;
@@ -144,24 +147,9 @@ p { margin: 0 0 16px 0; font-size: 14px; color: var(--text-muted); }
 .btn-outline { background: #f1f5f9; color: #475569; }
 .btn-outline:hover { background: #e2e8f0; }
 
-.btn-gps { background: #3b82f6; color: white; }
-
-.btn-delete {
-  background: transparent;
-  color: #ef4444;
-  border: 1px dashed #fecaca;
-  margin-top: 8px;
-}
-
-.btn-delete:hover {
-  background: #fef2f2;
-  border-color: #ef4444;
-}
-
 .menu-actions { display: flex; flex-direction: column; gap: 12px; width: 100%; }
 .nav-buttons { display: flex; gap: 10px; margin-top: 18px; width: 100%; }
 
-/* EREDMÉNY SZÖVEG BIZTONSÁGOS TÖRDELÉSE */
 #eredmeny {
   display: block;
   width: 100%;
@@ -183,7 +171,7 @@ p { margin: 0 0 16px 0; font-size: 14px; color: var(--text-muted); }
   width: 100%;
 }
 
-.karty {
+.karty, .type-card {
   background: #f8fafc;
   border: 2px solid #e2e8f0;
   padding: 16px 10px;
@@ -196,12 +184,13 @@ p { margin: 0 0 16px 0; font-size: 14px; color: var(--text-muted); }
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  color: var(--text-main);
 }
 
 .card-icon { font-size: 28px; }
-.karty:hover { border-color: #cbd5e1; background: #f1f5f9; }
+.karty:hover, .type-card:hover { border-color: #cbd5e1; background: #f1f5f9; }
 
-.karty.kivalasztva {
+.karty.kivalasztva, .type-card.selected {
   border-color: var(--danger);
   background: #fef2f2;
   color: var(--danger);
@@ -265,7 +254,7 @@ p { margin: 0 0 16px 0; font-size: 14px; color: var(--text-muted); }
 .btn-action-solve { background: var(--success); color: white; }
 .btn-action-solve:hover { background: var(--success-hover); }
 
-/* TÉRKEPEK KORLÁTOZÁSA */
+/* TÉRKEPEK */
 .map-box {
   width: 100%;
   border-radius: 12px;
@@ -334,7 +323,7 @@ input[type="file"] { display: none; }
 }
 
 /* BEVITELI MEZŐK & SELECT */
-textarea, input[type="tel"], .custom-select {
+textarea, input[type="tel"], .custom-select, input[type="text"] {
   width: 100%;
   padding: 12px;
   margin-top: 10px;
@@ -345,7 +334,7 @@ textarea, input[type="tel"], .custom-select {
   background: #ffffff;
 }
 
-textarea:focus, input[type="tel"]:focus, .custom-select:focus {
+textarea:focus, input[type="tel"]:focus, .custom-select:focus, input[type="text"]:focus {
   outline: none;
   border-color: var(--primary);
 }
@@ -382,7 +371,7 @@ textarea { resize: vertical; min-height: 80px; }
   margin-top: 8px;
 }
 
-/* KÉPNÉZŐ MODAL BEÁLLÍTÁSOK */
+/* MODAL */
 .modal {
   display: none;
   position: fixed;
@@ -415,7 +404,6 @@ textarea { resize: vertical; min-height: 80px; }
   object-fit: contain;
   display: block;
   border-radius: 8px;
-  transform-origin: center center !important;
 }
 
 .close-modal-btn {
@@ -432,24 +420,19 @@ textarea { resize: vertical; min-height: 80px; }
   z-index: 10000;
 }
 
-.modal-hint {
-  color: #94a3b8;
-  font-size: 12px;
-  margin-top: 15px;
-}
+.modal-hint { color: #94a3b8; font-size: 12px; margin-top: 15px; }
 
-/* LISTÁK BELSŐ GÖRGETÉSE */
+/* LISTÁK GÖRGETÉSE */
 #szervezetekLista, #bejelentesekLista, #sajatUgyekLista {
   max-height: 55vh;
   overflow-y: auto;
   padding-right: 4px;
 }
 
-/* === KÁRTYÁKON ÉS TÉRKÉPEN LÉVŐ KÉPEK (BÉLYEGKÉPEK) MÉRETEZÉSE === */
 .popup-img {
   width: 100%;
   height: 160px;
-  object-fit: cover; /* Kitölti a teret, de levágja a kilógó részeket, így nem torzul */
+  object-fit: cover;
   border-radius: 8px;
   cursor: pointer;
   margin-top: 8px;
@@ -458,11 +441,9 @@ textarea { resize: vertical; min-height: 80px; }
   transition: opacity 0.2s ease;
 }
 
-.popup-img:hover {
-  opacity: 0.85; /* Egy kis vizuális visszajelzés, hogy kattintható */
-}
+.popup-img:hover { opacity: 0.85; }
 
-/* === ÚTMUTATÓ KÁRTYÁK STÍLUSA === */
+/* ÚTMUTATÓ KÁRTYÁK */
 .guide-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -473,48 +454,13 @@ textarea { resize: vertical; min-height: 80px; }
   border-left: 4px solid var(--primary);
 }
 
-.guide-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
+.guide-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.guide-icon { font-size: 24px; }
+.guide-header h3 { margin: 0; font-size: 16px; color: var(--text-main); font-weight: 700; }
+.guide-body p { margin: 6px 0; font-size: 13px; line-height: 1.4; color: var(--text-muted); }
+.guide-body b, .guide-body p b { color: var(--text-main); }
 
-.guide-icon {
-  font-size: 24px;
-}
-
-.guide-header h3 {
-  margin: 0;
-  font-size: 16px;
-  color: var(--text-main);
-  font-weight: 700;
-}
-
-.guide-body p {
-  margin: 6px 0;
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--text-muted);
-}
-
-.guide-body b {
-  color: var(--text-main);
-}
-
-.guide-body p b {
-  color: var(--text-main);
-}
-
-.guide-body p:has(b:contains("TILOS")) {
-  background: #fef2f2;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #fecaca;
-  color: #991b1b;
-}
-
-/* === BEJELENTÉS TÖRLÉSE GOMB (SZAGGATOTT PIROS KERET) === */
+/* BEJELENTÉS TÖRLÉSE GOMB */
 .btn-delete {
   border: 1px dashed #ef4444 !important;
   color: #ef4444 !important;
@@ -528,11 +474,216 @@ textarea { resize: vertical; min-height: 80px; }
   color: #dc2626 !important;
 }
 
-/* === KIZÁRÓLAG A FŐMENÜ 4 GOMBJÁNAK VASTAGÍTÁSA === */
+/* FŐMENÜ GOMBOK */
 #step0 .menu-actions .btn {
-  padding-top: 24px !important;
-  padding-bottom: 24px !important;
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
   min-height: 100px !important;
   font-size: 20px !important;
   line-height: 1.3 !important;
+}
+
+.theme-toggle-btn {
+  position: absolute !important;
+  top: 16px !important;
+  right: 16px !important; /* Jobb oldalon marad */
+  left: auto !important;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 20px !important; /* Szintén kapszula forma */
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 20 !important;
+  color: #0f172a;
+  width: auto !important;
+  height: auto !important;
+}
+
+.lang-toggle-btn {
+  position: absolute !important;
+  top: 16px !important;
+  left: 16px !important; /* Bal oldalra húzva */
+  right: auto !important;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 20px !important; /* Lekerekített kapszula */
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 20 !important;
+  color: #0f172a;
+}
+
+.lang-toggle-btn:hover,
+.theme-toggle-btn:hover {
+  background-color: #e2e8f0 !important;
+}
+
+/* ==========================================================================
+   2. TELJES SÖTÉT MÓD (DARK MODE) OVERRIDE
+   ========================================================================== */
+
+[data-theme="dark"] body {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .container,
+[data-theme="dark"] .report-card,
+[data-theme="dark"] .info-card,
+[data-theme="dark"] .guide-card,
+[data-theme="dark"] .report-card-wrapper,
+[data-theme="dark"] #imagePreviewBox {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] p, 
+[data-theme="dark"] span, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] label,
+[data-theme="dark"] .report-title,
+[data-theme="dark"] .guide-header h3,
+[data-theme="dark"] .guide-body b {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .step-desc, 
+[data-theme="dark"] .modal-hint,
+[data-theme="dark"] .guide-body p,
+[data-theme="dark"] p[style*="color: #64748b"],
+[data-theme="dark"] span[style*="color: #64748b"] {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .step-badge {
+  background-color: #334155 !important;
+  color: #38bdf8 !important;
+  border: 1px solid #475569 !important;
+}
+
+[data-theme="dark"] .karty,
+[data-theme="dark"] .type-card {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .karty:hover,
+[data-theme="dark"] .type-card:hover {
+  background-color: #334155 !important;
+}
+
+[data-theme="dark"] .karty.kivalasztva,
+[data-theme="dark"] .type-card.selected {
+  background-color: #7f1d1d !important;
+  border-color: #ef4444 !important;
+  color: #fca5a5 !important;
+}
+
+[data-theme="dark"] input, 
+[data-theme="dark"] select, 
+[data-theme="dark"] textarea,
+[data-theme="dark"] .custom-file-upload {
+  background-color: #334155 !important;
+  color: #ffffff !important;
+  border-color: #475569 !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .btn-outline {
+  background-color: #334155 !important;
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background-color: #475569 !important;
+}
+
+[data-theme="dark"] .view-toggle {
+  background-color: #0f172a !important;
+}
+
+[data-theme="dark"] .toggle-btn:not(.active) {
+  background-color: transparent !important;
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .toggle-btn.active {
+  background-color: #334155 !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .lang-toggle-btn,
+[data-theme="dark"] .theme-toggle-btn {
+  background-color: #1e293b !important;
+  border-color: #475569 !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .lang-toggle-btn:hover,
+[data-theme="dark"] .theme-toggle-btn:hover {
+  background-color: #334155 !important;
+}
+
+[data-theme="dark"] a[href*="google.com/maps"] {
+  color: #38bdf8 !important;
+}
+
+[data-theme="dark"] p[style*="background:#ecfdf5"],
+[data-theme="dark"] p[style*="background: #ecfdf5"] {
+  background-color: #064e3b !important;
+  border-color: #059669 !important;
+  color: #a7f3d0 !important;
+}
+
+[data-theme="dark"] p[style*="background:#ecfdf5"] b,
+[data-theme="dark"] p[style*="background: #ecfdf5"] b {
+  color: #34d399 !important;
+}
+
+[data-theme="dark"] .status-badge.megoldva {
+  background-color: #065f46 !important;
+  color: #34d399 !important;
+}
+
+[data-theme="dark"] .status-badge.uj {
+  background-color: #991b1b !important;
+  color: #fca5a5 !important;
+}
+
+[data-theme="dark"] .status-badge.folyamatban {
+  background-color: #9a3412 !important;
+  color: #fdba74 !important;
+}
+
+[data-theme="dark"] .leaflet-control-zoom a {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+[data-theme="dark"] .leaflet-control-zoom a:hover {
+  background-color: #334155 !important;
+  color: #38bdf8 !important;
+}
+
+[data-theme="dark"] .leaflet-bar {
+  border: 1px solid #475569 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
 }

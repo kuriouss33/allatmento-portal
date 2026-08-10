@@ -22,25 +22,39 @@
 <body>
 
 <!-- ================= 0. KÉPERNYŐ: Főmenü ================= -->
-<div class="container" id="step0">
+<div class="container" id="step0" style="position: relative;">
+  <!-- SÖTÉT MÓD KAPCSOLÓ GOMB -->
+  <button id="themeToggleBtn" class="theme-toggle-btn" title="Téma váltása">🌙</button>
+
+  <!-- NYELVVÁLASZTÓ GOMB -->
+  <button id="langToggleBtn" class="lang-toggle-btn" title="Language / Nyelv">🇬🇧 EN</button>
+
   <div class="logo-header">
     <span class="app-icon">🐾</span>
-    <h2>Állatmentő Portál</h2>
-    <p>Sürgősségi segítség & koordináció</p>
+    <h2 id="appTitleText">Állatmentő Portál</h2>
+    <p id="appSubText">Sürgősségi segítség & koordináció</p>
   </div>
   
   <div class="menu-actions">
-    <button id="menuMapBtn" class="btn btn-primary">🗺️ Aktív bejelentések (Térkép / Lista)</button>
-    <button id="menuNewBtn" class="btn btn-danger">🚨 Új bejelentést teszek</button>
-    <button id="menuSajatBtn" class="btn btn-sajat">📋 Saját ügyeim & Vállalásaim</button>
-    <button id="menuInfoBtn" class="btn btn-secondary">ℹ️ Információk & Elérhetőségek</button>
+    <button id="menuMapBtn" class="btn btn-primary">
+      <span id="btnActiveReportsText">🗺️ Bejelentések</span>
+    </button>
+    <button id="menuNewBtn" class="btn btn-danger">
+      <span id="btnNewReportText">🚨 Új bejelentést teszek</span>
+    </button>
+    <button id="menuSajatBtn" class="btn btn-sajat">
+      <span id="btnMyCasesText">📋 Saját ügyeim & Vállalásaim</span>
+    </button>
+    <button id="menuInfoBtn" class="btn btn-secondary">
+      <span id="btnInfoText">ℹ️ Információk & Elérhetőségek</span>
+    </button>
   </div>
 </div>
 
 <!-- ================= 0/B KÉPERNYŐ: Központi Térkép & Lista Nézet ================= -->
 <div class="container" id="stepMap" style="display: none;">
-  <h2>Aktív Bejelentések</h2>
-  <p>Kövesd az ügyek állapotát vagy vállalj mentést!</p>
+  <h2 id="activeReportsTitle">Bejelentések</h2>
+  <p id="activeReportsSub">Kövesd az ügyek állapotát vagy vállalj mentést!</p>
 
   <!-- NÉZETVÁLTÓ GOMBOK -->
   <div class="view-toggle">
@@ -64,8 +78,8 @@
 
 <!-- ================= ÚJ KÉPERNYŐ: SAJÁT ÜGYEIM ================= -->
 <div class="container" id="stepSajat" style="display: none;">
-  <h2>📋 Saját Ügyeim</h2>
-  <p>Az általad tett és az elvállalt bejelentések:</p>
+  <h2 id="myCasesTitle">📋 Saját Ügyeim</h2>
+  <p id="myCasesSub">Az általad tett és az elvállalt bejelentések:</p>
 
   <div id="sajatUgyekLista">
     <p style="color: #64748b;">⏳ Betöltés...</p>
@@ -76,26 +90,26 @@
 
 <!-- ================= 1. LÉPÉS: ÁLLATFAJTA ================= -->
 <div class="container" id="step1" style="display: none;">
-  <span class="step-badge">1 / 3 LÉPÉS</span>
-  <h2>Állatfajta</h2>
-  <p>Milyen állatról van szó?</p>
+  <span class="step-badge" id="step1Badge">1 / 3 LÉPÉS</span>
+  <h2 id="step1Title">Állatfajta</h2>
+  <p id="step1Sub">Milyen állatról van szó?</p>
 
   <div class="grid">
     <div class="karty" data-fajta="Kutya">
       <span class="card-icon">🐶</span>
-      <span>Kutya</span>
+      <span id="typeDog">Kutya</span>
     </div>
     <div class="karty" data-fajta="Macska">
       <span class="card-icon">🐱</span>
-      <span>Macska</span>
+      <span id="typeCat">Macska</span>
     </div>
     <div class="karty" data-fajta="Vadállat">
       <span class="card-icon">🦅</span>
-      <span>Vadállat</span>
+      <span id="typeWild">Vadállat</span>
     </div>
     <div class="karty" data-fajta="Egyéb">
       <span class="card-icon">❓</span>
-      <span>Egyéb</span>
+      <span id="typeOther">Egyéb</span>
     </div>
   </div>
 
@@ -107,9 +121,9 @@
 
 <!-- ================= 2. LÉPÉS: HELYSZÍN ÉS FOTÓ ================= -->
 <div class="container" id="step2" style="display: none;">
-  <span class="step-badge">2 / 3 LÉPÉS</span>
-  <h2>Helyszín & Fotó</h2>
-  <p class="step-desc">Hol láttad az állatot? Csatolhatsz fotót is.</p>
+  <span class="step-badge" id="step2Badge">2 / 3 LÉPÉS</span>
+  <h2 id="step2Title">Helyszín & Fotó</h2>
+  <p class="step-desc" id="step2Sub">Hol láttad az állatot? Csatolhatsz fotót is.</p>
 
   <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
     <button id="gpsButton" class="btn btn-primary" type="button">📍 Saját pozíció lekérése (GPS)</button>
@@ -148,9 +162,9 @@
 
 <!-- ================= 3. LÉPÉS: Megjegyzés & Küldés ================= -->
 <div class="container" id="step3" style="display: none;">
-  <span class="step-badge">3 / 3 LÉPÉS</span>
-  <h2>Részletek & Küldés</h2>
-  <p>Megjegyzés és elérhetőség (opcionális)</p>
+  <span class="step-badge" id="step3Badge">3 / 3 LÉPÉS</span>
+  <h2 id="step3Title">Részletek & Küldés</h2>
+  <p id="step3Sub">Megjegyzés és elérhetőség (opcionális)</p>
 
   <textarea id="megjegyzes" placeholder="Pl.: Félős, a bokor alatt lapul, kék nyakörv van rajta..."></textarea>
   <input type="tel" id="telefon" placeholder="Telefonszámod (opcionális)">
@@ -163,8 +177,8 @@
 
 <!-- ================= 4. KÉPERNYŐ: Információk & Útmutatók ================= -->
 <div class="container" id="step4" style="display: none;">
-  <h2>ℹ️ Információk & Útmutatók</h2>
-  <p>Szervezetek elérhetőségei és teendők vészhelyzet esetén:</p>
+  <h2 id="step4Title">ℹ️ Információk & Útmutatók</h2>
+  <p id="step4Sub">Szervezetek elérhetőségei és teendők vészhelyzet esetén:</p>
 
   <!-- NÉZETVÁLTÓ GOMBOK (SZERVEZETEK | ÚTMUTATÓK) -->
   <div class="view-toggle">
@@ -173,13 +187,25 @@
   </div>
 
   <!-- A) SZERVEZETEK SZAKASZ -->
-  <div id="szervezetekSzakasz">
-    <input type="text" id="szervezetKeresoInput" placeholder="🔍 Keresés név, város vagy kulcsszó alapján..." style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; box-sizing: border-box;">
+  <div id="szervezetekSzakasz" style="display: flex; flex-direction: column; gap: 10px;">
+    
+    <!-- SZÖVEGES KERESŐ -->
+    <input type="text" id="szervezetKeresoInput" placeholder="🔍 Keresés név, város vagy kulcsszó alapján..." style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; box-sizing: border-box; margin: 0;">
 
-    <select id="megyeValaszto" class="custom-select" style="margin-top: 0; margin-bottom: 15px;">
-      <option value="Összes">Összes megye / régió</option>
+    <!-- KATEGÓRIA SZŰRŐ -->
+    <select id="kategoriaValaszto" class="custom-select" style="margin: 0;">
+      <option value="Összes" id="optCatAll">Minden kategória</option>
+      <option value="mentoszervezet" id="optCatShelter">🐕 Menhelyek & Egyesületek</option>
+      <option value="orvos" id="optCatVet">🏥 Állatkórházak & Rendelők</option>
+      <option value="hatosag" id="optCatAuth">🏛️ Hatóságok & Polgárőrség</option>
+      <option value="vad" id="optCatWild">🦅 Vadmentés</option>
+    </select>
+
+    <!-- MEGYE VÁLASZTÓ -->
+    <select id="megyeValaszto" class="custom-select" style="margin: 0;">
+      <option value="Összes" id="optCtyAll">Összes megye / régió</option>
       <option value="Budapest">Budapest</option>
-      <option value="Pest">Pest megye</option>
+      <option value="Pest" id="optCtyPest">Pest megye</option>
       <option value="Bács-Kiskun">Bács-Kiskun</option>
       <option value="Baranya">Baranya</option>
       <option value="Borsod-Abaúj-Zemplén">Borsod-Abaúj-Zemplén</option>
@@ -201,9 +227,9 @@
     <div class="guide-card">
       <div class="guide-header">
         <span class="guide-icon">🐣</span>
-        <h3>Madárfióka (Csupasz vagy tollas?)</h3>
+        <h3 id="g1Title">Madárfióka (Csupasz vagy tollas?)</h3>
       </div>
-      <div class="guide-body">
+      <div class="guide-body" id="g1Body">
         <p><b>1. Csupasz / Pehelytollas fióka:</b> Még nem tudja elhagyni a fészket. Ha megtalálod a fészket, <b>tedd vissza!</b> (Tévhit: a madarak nem hagyják el a fiókát az emberi szag miatt). Ha a fészek megsemmisült, tegyed egy kis bélelt dobozba és rögzítsd a fára.</p>
         <p><b>2. Tollas fióka (Fészekhagyó):</b> A rigók, cinkék, baglyok fiókái természetes módon elhagyják a fészket, mielőtt röpképesek lennének. A szüleik a földön is etetik őket! <b>Ne vidd el!</b> Csak akkor nyúlj hozzá, ha közvetlen veszélyben van (úttest, macska) – ekkor tedd fel a legközelebbi bokor/fa ágára.</p>
         <p><b>⚠️ Szigorúan TILOS:</b> Fecskendőből vizet vagy tejet nyomni a csőrébe! A légcsőnyílásuk a nyelvük mögött van, így pillanatok alatt megfulladnak tőle.</p>
@@ -214,9 +240,9 @@
     <div class="guide-card">
       <div class="guide-header">
         <span class="guide-icon">🦅</span>
-        <h3>Felnőtt, sérült madár</h3>
+        <h3 id="g2Title">Felnőtt, sérült madár</h3>
       </div>
-      <div class="guide-body">
+      <div class="guide-body" id="g2Body">
         <p><b>1. Ablaknak repült / Sokkos madár:</b> Gyakran csak agyrázkódása van. Dobj rá egy törölközőt, óvatosan tedd egy zárt, szellőzőnyílásokkal ellátott <b>kartondobozba</b>, és tedd csendes, sötét helyre. 1-2 óra múlva nyisd ki a dobozt a szabadban – ha magához tért, el fog repülni.</p>
         <p><b>2. Lógó szárny, vérzés, törés:</b> Helyezd sötét kartondobozba (a sötétség csökkenti a sokkot). A doboz aljára tegyél papírtörlőt.</p>
         <p><b>⚠️ Fontos:</b> Ne adj neki ételt és vizet is maximum egy pici kupakban vagy tálkában tegyél be mellé! Hívd a legközelebbi Nemzeti Parkot vagy Mályi/Rákosmenti Madármentőket.</p>
@@ -227,9 +253,9 @@
     <div class="guide-card">
       <div class="guide-header">
         <span class="guide-icon">🐱</span>
-        <h3>Sérült vagy elütött macska</h3>
+        <h3 id="g3Title">Sérült vagy elütött macska</h3>
       </div>
-      <div class="guide-body">
+      <div class="guide-body" id="g3Body">
         <p><b>1. Védekezés:</b> A fájdalmat érző macska pánikba esik, súlyos harapott/karmolt sebet okozhat! Használj vastag pokrócot vagy munkavédelmi kesztyűt.</p>
         <p><b>2. "Burrito" módszer:</b> Terítsd rá a pokrócot, és szorosan tekerd be a testét és a lábait, így biztonságosan fel tudod emelni anélkül, hogy megkarcolna vagy kárt tenne magában.</p>
         <p><b>3. Szállítás:</b> Tedd zárt hordozóba vagy dobozba. Ha sokkos állapotban van (kihűlés fenyegeti), tegyél mellé törölközőbe tekert melegvizes palackot.</p>
@@ -240,9 +266,9 @@
     <div class="guide-card">
       <div class="guide-header">
         <span class="guide-icon">🐶</span>
-        <h3>Talált vagy elütött kutya</h3>
+        <h3 id="g4Title">Talált vagy elütött kutya</h3>
       </div>
-      <div class="guide-body">
+      <div class="guide-body" id="g4Body">
         <p><b>1. Megközelítés:</b> Lassan, guggolva, oldalról közelíts! Ne nézz közvetlenül a szemébe, és beszélj hozzá halkan. Ne tegyél hirtelen mozdulatot.</p>
         <p><b>2. Sérült kutya mozgatása:</b> A fájdalom miatt a legszelídebb kutya is kaphat maga felé. Ha emelned kell, pléd segítségével hordágyként mozgassátok. Ha szükséges, pórázzal vagy gézzel óvatosan kösd át a pofáját a szállítás idejére.</p>
         <p><b>3. Ingyenes chipolvasás:</b> A legtöbb <b>MOL benzinkúton</b> és minden állatorvosnál díjmentesen leolvassák a mikrochipet a gazda értesítéséhez.</p>
@@ -253,9 +279,9 @@
     <div class="guide-card">
       <div class="guide-header">
         <span class="guide-icon">🦔</span>
-        <h3>Sünök & Denevérek</h3>
+        <h3 id="g5Title">Sünök & Denevérek</h3>
       </div>
-      <div class="guide-body">
+      <div class="guide-body" id="g5Body">
         <p><b>🦔 Sün nappal a szabadban:</b> A sün éjszakai állat. Ha nappal nyílt terepen kóborol, billeg vagy elterül, az szinte biztosan betegséget vagy sérülést jelez. Kesztyűvel tedd magas falu dobozba.</p>
         <p><b>🦔 Kicsi sün télen:</b> Késő ősszel/télen a 400-500 gramm alatti sünök nem tudnak áttelelni, segítségre van szükségük!</p>
         <p><b>🦇 Denevér a lakásban/földön:</b> Védett állat! <b>Soha ne nyúlj hozzá puszta kézzel!</b> Teríts rá egy rongyot, tedd dobozba és értesítsd a helyi Nemzeti Park Igazgatóságot.</p>
@@ -266,9 +292,9 @@
     <div class="guide-card">
       <div class="guide-header">
         <span class="guide-icon">🦊</span>
-        <h3>Nagyvadak (Őz, Róka, Vaddisznó)</h3>
+        <h3 id="g6Title">Nagyvadak (Őz, Róka, Vaddisznó)</h3>
       </div>
-      <div class="guide-body">
+      <div class="guide-body" id="g6Body">
         <p><b>1. Saját biztonság:</b> Sérült őzhöz, vaddisznóhoz ne menj közel! A patájukkal és agyarukkal életveszélyes sérülést okozhatnak.</p>
         <p><b>2. Közúti baleset esetén:</b> Kapcsold be a vészvillogót, tegyed ki az elakadásjelző háromszöget. Hívd a <b>112-es segélyhívót</b> – ők értesítik a területileg illetékes vadásztársaságot.</p>
         <p><b>3. Autópályán:</b> Az autópálya-kezelőt vagy a 112-t értesítsd, ne szállj ki az autóból a leállósávban sem védőfelszerelés nélkül!</p>
@@ -286,7 +312,7 @@
   <div class="modal-content-wrapper">
     <img id="modalImage" src="" alt="Nagyított kép">
   </div>
-  <p class="modal-hint">Görgess vagy húzd az ujjad a zoomoláshoz</p>
+  <p class="modal-hint" id="modalHintText">Görgess vagy húzd az ujjad a zoomoláshoz</p>
 </div>
 
 <script src="script.js"></script>
